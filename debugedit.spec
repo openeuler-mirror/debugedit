@@ -1,6 +1,6 @@
 Name: debugedit
 Version: 5.0
-Release: 1
+Release: 2
 Summary: Tools for debuginfo creation
 License: GPL-2.0-or-later and LGPL-2.1-only and GPL-3.0-only
 Group:   Applications
@@ -18,6 +18,7 @@ Suggests: gdb-minimal
 Requires: sed dwz grep
 
 Patch0: tests-Handle-zero-directory-entry-in-.debug_line-DWA.patch
+Patch1: find-debuginfo.sh-decompress-DWARF-compressed-ELF-se.patch
 
 %description
 Debugedit provides programs and scripts for creating debuginfo and
@@ -55,5 +56,8 @@ make check %{?_smp_mflags}
 %{_mandir}/man1/find-debuginfo.1*
 
 %changelog
+* Tue Jan 11 2022 renhongxun <renhongxun@huawei.com> 5.0-2
+- bugfix
+
 * Sat Dec 25 2021 renhongxun <renhongxun@huawei.com>
 - init package
