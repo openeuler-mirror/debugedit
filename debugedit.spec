@@ -1,6 +1,6 @@
 Name: debugedit
 Version: 5.0
-Release: 3
+Release: 4
 Summary: Tools for debuginfo creation
 License: GPL-2.0-or-later and LGPL-2.1-only and GPL-3.0-only
 Group:   Applications
@@ -39,6 +39,10 @@ autoreconf -f -v -i
 %make_install
 cd %{buildroot}%{_bindir}
 ln -s find-debuginfo find-debuginfo.sh
+cd %{buildroot}
+mkdir -p %{buildroot}%{_rpmconfigdir}
+ln -s %{_bindir}/find-debuginfo %{buildroot}%{_rpmconfigdir}/find-debuginfo.sh
+ln -s %{_bindir}/debugedit %{buildroot}%{_rpmconfigdir}/debugedit
 
 %check
 sed -i 's/^\(C\|LD\)FLAGS=.*/\1FLAGS=""/' tests/atlocal
@@ -56,8 +60,13 @@ make check %{?_smp_mflags}
 %{_mandir}/man1/debugedit.1*
 %{_mandir}/man1/sepdebugcrcfix.1*
 %{_mandir}/man1/find-debuginfo.1*
+%{_rpmconfigdir}/find-debuginfo.sh
+%{_rpmconfigdir}/debugedit
 
 %changelog
+* Tue Nov 08 2022 renhongxun <renhongxun@h-partners.com> 5.0-4
+- make it successfully to find debugedit when running /usr/lib/rpm/find-debuginfo.sh
+
 * Fri Oct 21 2022 renhongxun <renhongxun@h-partners.com> 5.0-3
 - fix -u option
 
