@@ -1,6 +1,6 @@
 Name: debugedit
 Version: 5.0
-Release: 4
+Release: 5
 Summary: Tools for debuginfo creation
 License: GPL-2.0-or-later and LGPL-2.1-only and GPL-3.0-only
 Group:   Applications
@@ -21,6 +21,9 @@ Patch0: tests-Handle-zero-directory-entry-in-.debug_line-DWA.patch
 Patch1: find-debuginfo.sh-decompress-DWARF-compressed-ELF-se.patch
 
 Patch6000: backport-Fix-u-option.patch
+%ifarch loongarch64
+Patch9000: skip-some-unsupported-tests.patch
+%endif
 
 %description
 Debugedit provides programs and scripts for creating debuginfo and
@@ -64,6 +67,9 @@ make check %{?_smp_mflags}
 %{_rpmconfigdir}/debugedit
 
 %changelog
+* Mon Nov 14 2022 Wenlong Zhang <zhangwenlong@loongson.cn> - 5.0-5
+- Skip some unsupported tests for loongarch
+
 * Tue Nov 08 2022 renhongxun <renhongxun@h-partners.com> 5.0-4
 - make it successfully to find debugedit when running /usr/lib/rpm/find-debuginfo.sh
 
