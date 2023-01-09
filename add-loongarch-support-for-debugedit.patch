@@ -1,0 +1,29 @@
+From 0862098a423f3324b5e8024f94e42ebcc1ec1697 Mon Sep 17 00:00:00 2001
+From: Wenlong Zhang <zhangwenlong@loongson.cn>
+Date: Mon, 9 Jan 2023 18:40:28 +0800
+Subject: [PATCH] add loongarch support for debugedit
+
+---
+ tools/debugedit.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/tools/debugedit.c b/tools/debugedit.c
+index 668777a..911e84e 100644
+--- a/tools/debugedit.c
++++ b/tools/debugedit.c
+@@ -618,6 +618,12 @@ setup_relbuf (DSO *dso, debug_section *sec, int *reltype)
+ 	    goto fail;
+ 	  break;
+ #endif
++#if defined(EM_LOONGARCH)
++        case EM_LOONGARCH:
++          if (rtype != R_LARCH_32)
++            goto fail;
++          break;
++#endif
+ #if defined(EM_MCST_ELBRUS) && defined(R_E2K_32_ABS)
+ 	case EM_MCST_ELBRUS:
+ 	  if (rtype != R_E2K_32_ABS)
+-- 
+2.33.0
+
