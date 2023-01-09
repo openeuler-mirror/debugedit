@@ -1,6 +1,6 @@
 Name: debugedit
 Version: 5.0
-Release: 5
+Release: 6
 Summary: Tools for debuginfo creation
 License: GPL-2.0-or-later and LGPL-2.1-only and GPL-3.0-only
 Group:   Applications
@@ -22,7 +22,7 @@ Patch1: find-debuginfo.sh-decompress-DWARF-compressed-ELF-se.patch
 
 Patch6000: backport-Fix-u-option.patch
 %ifarch loongarch64
-Patch9000: skip-some-unsupported-tests.patch
+Patch9000: add-loongarch-support-for-debugedit.patch
 %endif
 
 %description
@@ -67,6 +67,9 @@ make check %{?_smp_mflags}
 %{_rpmconfigdir}/debugedit
 
 %changelog
+* Fri Jan 6 2023 Wenlong Zhang<zhangwenlong@loongson.cn> - 5.0-6
+- add loongarch64 support for debugedit
+
 * Mon Nov 14 2022 Wenlong Zhang <zhangwenlong@loongson.cn> - 5.0-5
 - Skip some unsupported tests for loongarch
 
