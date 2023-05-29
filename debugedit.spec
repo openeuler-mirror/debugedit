@@ -1,6 +1,6 @@
 Name: debugedit
 Version: 5.0
-Release: 6
+Release: 7
 Summary: Tools for debuginfo creation
 License: GPL-2.0-or-later and LGPL-2.1-only and GPL-3.0-only
 Group:   Applications
@@ -49,6 +49,9 @@ ln -s %{_bindir}/debugedit %{buildroot}%{_rpmconfigdir}/debugedit
 
 %check
 sed -i 's/^\(C\|LD\)FLAGS=.*/\1FLAGS=""/' tests/atlocal
+%if "%toolchain" == "clang"
+%global toolchain gcc
+%endif
 make check %{?_smp_mflags}
 
 %clean
@@ -67,6 +70,9 @@ make check %{?_smp_mflags}
 %{_rpmconfigdir}/debugedit
 
 %changelog
+* Mon May 29 2023 liyunfei <liyunfei33@huawei.com> - 5.0-7
+- add clang compile support
+
 * Fri Jan 6 2023 Wenlong Zhang<zhangwenlong@loongson.cn> - 5.0-6
 - add loongarch64 support for debugedit
 
